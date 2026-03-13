@@ -87,4 +87,4 @@
 2. Добавьте исключение в антивирусе
 3. Напишите на почту поддержки
 
-Email: 2010turyk.artem@gmail.com
+Email: smyrnov.artem2009@gmail.com
