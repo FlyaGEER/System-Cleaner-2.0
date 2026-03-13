@@ -1,0 +1,12 @@
+# Force .bat files to download instead of opening
+AddType application/octet-stream .bat
+AddType application/octet-stream .cmd
+
+# Disable content sniffing
+Header set X-Content-Type-Options "nosniff"
+
+# Set proper headers for downloads
+<FilesMatch "\.(bat|cmd)$">
+    ForceType application/octet-stream
+    Header set Content-Disposition attachment
+</FilesMatch>

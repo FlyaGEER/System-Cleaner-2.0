@@ -1,0 +1,31 @@
+{
+    "name": "system-cleaner-pro-website",
+    "version": "3.0.0",
+    "description": "Website for downloading System Cleaner Pro 3.0 - Windows cleanup utility",
+    "main": "index.html",
+    "scripts": {
+        "start": "live-server . --port=5500",
+        "dev": "live-server . --port=5500 --watch=.",
+        "build-setup": "compile.bat",
+        "prepare-files": "if not exist downloads mkdir downloads && copy SystemCleaner.bat downloads\\ && copy README.txt downloads\\ && copy icon.ico downloads\\ && copy Запуск.bat downloads\\",
+        "test": "echo \"No tests specified\" && exit 0"
+    },
+    "keywords": [
+        "system-cleaner",
+        "windows-cleaner",
+        "bat-file",
+        "setup-exe",
+        "cleanup",
+        "optimization"
+    ],
+    "author": "System Tools",
+    "license": "MIT",
+    "devDependencies": {
+        "live-server": "^1.2.2"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/systemtools/system-cleaner-pro"
+    },
+    "homepage": "https://systemtools.github.io/system-cleaner-pro"
+}
