@@ -264,31 +264,36 @@ function closeBatWarning() {
     }
 }
 
-// FAQ аккордеон
+// FAQ аккордеон - ИСПРАВЛЕНО!
 function initFAQ() {
-    const faqQuestions = document.querySelectorAll('.faq-question');
+    // Используем правильные селекторы для твоего HTML
+    const faqQuestions = document.querySelectorAll('.faq-q');
     
     faqQuestions.forEach(question => {
         question.addEventListener('click', function() {
-            const faqItem = this.parentElement;
-            const isActive = faqItem.classList.contains('active');
+            const faqCard = this.closest('.faq-card');
+            if (!faqCard) return;
+            
+            const isActive = faqCard.classList.contains('active');
             
             // Закрываем все открытые вопросы
-            document.querySelectorAll('.faq-item.active').forEach(item => {
-                if (item !== faqItem) {
+            document.querySelectorAll('.faq-card.active').forEach(item => {
+                if (item !== faqCard) {
                     item.classList.remove('active');
                 }
             });
             
             // Открываем/закрываем текущий вопрос
             if (!isActive) {
-                faqItem.classList.add('active');
+                faqCard.classList.add('active');
+            } else {
+                faqCard.classList.remove('active');
             }
             
             // На мобильных прокручиваем к открытому вопросу
             if (window.innerWidth < 768 && !isActive) {
                 setTimeout(() => {
-                    faqItem.scrollIntoView({ 
+                    faqCard.scrollIntoView({ 
                         behavior: 'smooth', 
                         block: 'nearest' 
                     });
@@ -296,6 +301,8 @@ function initFAQ() {
             }
         });
     });
+    
+    console.log('FAQ initialized with', faqQuestions.length, 'questions');
 }
 
 // Отслеживание скачиваний и показ инструкции
@@ -337,7 +344,7 @@ function initDownloadTracking() {
 }
 
 function createDownloadCounter(count) {
-    const downloadSection = document.querySelector('.download-section');
+    const downloadSection = document.querySelector('.download');
     if (downloadSection && !document.querySelector('.download-counter')) {
         const counterDiv = document.createElement('div');
         counterDiv.className = 'download-counter';
@@ -730,13 +737,14 @@ function initSmoothScroll() {
     });
 }
 
-// Обновление года в футере
+// Обновление года в футере - ИСПРАВЛЕНО!
 function updateCopyrightYear() {
     const currentYear = new Date().getFullYear();
-    const copyrightText = document.querySelector('.footer-bottom p');
+    const copyrightText = document.querySelector('.copyright');
     
-    if (copyrightText && copyrightText.textContent.includes('2024')) {
-        copyrightText.innerHTML = copyrightText.innerHTML.replace('2024', currentYear);
+    if (copyrightText) {
+        // Обновляем год в тексте копирайта
+        copyrightText.innerHTML = copyrightText.innerHTML.replace(/\d{4}/, currentYear);
     }
 }
 
@@ -759,7 +767,7 @@ function initAnimations() {
     }, observerOptions);
     
     // Наблюдаем за элементами для анимации
-    document.querySelectorAll('.download-card, .capability, .step, .material-card').forEach(el => {
+    document.querySelectorAll('.card, .cap-card, .step-card, .extra-item').forEach(el => {
         el.style.opacity = '0';
         el.style.transform = 'translateY(20px)';
         el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
@@ -768,7 +776,7 @@ function initAnimations() {
     
     // Проверка видимости при загрузке
     setTimeout(() => {
-        document.querySelectorAll('.download-card, .capability, .step, .material-card').forEach(el => {
+        document.querySelectorAll('.card, .cap-card, .step-card, .extra-item').forEach(el => {
             const rect = el.getBoundingClientRect();
             if (rect.top < window.innerHeight - 100) {
                 el.style.opacity = '1';
